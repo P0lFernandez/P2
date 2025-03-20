@@ -144,10 +144,16 @@ Ejercicios
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
 	  estar seguros de que un segmento de señal se corresponde con voz.
 
+    En el primer silencio tenemos una potencia media de unos 20 dB. El cambio con la voz es de unos 20 dB's por encima, es decir a 40 dB's aprox, llegando a estar hasta 65 dB's.
+
 	* Duración mínima razonable de los segmentos de voz y silencio.
+    
+	En nuestro audio de ejemplo, hemos considerado como silencio a partir de los 300ms. En cambio, la voz la hemos considerado a partir de 1s de duración.
+
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
 
+      
 
 ### Desarrollo del detector de actividad vocal
 
