@@ -41,3 +41,15 @@ float compute_zcr(const float *x, unsigned int N, float fm) {
     }
     return (fm/2.0)*(1.0/(N-1.0))*count;
 }
+int sgn(float x){
+    if(x<0){
+        return -1;
+    }
+    if(x==0){
+        return 0;
+    }
+    if(x>0){
+        return 1;
+    }
+    return 0;
+}
