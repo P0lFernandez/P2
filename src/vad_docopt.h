@@ -19,6 +19,7 @@ typedef struct {
     char *input_wav;
     char *output_vad;
     char *output_wav;
+    char *alpha0;
     /* special */
     const char *usage_pattern;
     const char *help_message;

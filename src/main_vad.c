@@ -32,7 +32,8 @@ int main(int argc, char *argv[]) {
   input_wav  = args.input_wav;
   output_vad = args.output_vad;
   output_wav = args.output_wav;
-  float alpha0 = 5;
+  //float alpha0 = 5;-------------------------------------
+  float alpha0 = atof(args.alpha0);
 
   if (input_wav == 0 || output_vad == 0) {
     fprintf(stderr, "%s\n", args.usage_pattern);
