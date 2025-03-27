@@ -152,14 +152,14 @@ Ejercicios
 
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
-
+      La ZCR nos indica cuando el señal de un sonido varia mucho de positivo a negativo. Un claro ejemplo, es en el ruido que hay en los silencios o a los sonidos fricativos o no sonoros donde podriamos ver valores mas altos en estos tramos. Respecto nuestro audio, lo vemos claramente en la primera letra del audio, la 'S' de la palabra 'Som' como hay un pico en el gráfico de ZCR.
       
 
 ### Desarrollo del detector de actividad vocal
 
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal en
   tiempo real tan exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
-
+![alt text](image.png)
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
 
