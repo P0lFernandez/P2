@@ -1,16 +1,20 @@
 #!/bin/bash
 
+
+export LC_ALL=C
+
+alpha0=${1:-5}
 # Be sure that this file has execution permissions:
 # Use the nautilus explorer or chmod +x run_vad.sh
 
 # Establecemos que el código de retorno de un pipeline sea el del último programa con código de retorno
 # distinto de cero, o cero si todos devuelven cero.
 set -o pipefail
-alpha0=${1:-5.0}
+
 # Write here the name and path of your program and database
 DIR_P2=$HOME/PAV/P2
 DB=$DIR_P2/db.v4
-CMD="$DIR_P2/bin/vad -i $alpha0"
+CMD="$DIR_P2/bin/vad -0 $alpha0"
 
 for filewav in $DB/*/*wav; do
 #    echo

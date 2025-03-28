@@ -16,10 +16,10 @@ typedef struct {
     int verbose;
     int version;
     /* options with arguments */
+    char *alpha0;
     char *input_wav;
     char *output_vad;
     char *output_wav;
-    char *alpha0;
     /* special */
     const char *usage_pattern;
     const char *help_message;
@@ -40,6 +40,7 @@ const char help_message[] =
 "   -v, --verbose  Show debug information\n"
 "   -h, --help     Show this screen\n"
 "   --version      Show the version of the project\n"
+"   -0 FLOAT, --alpha0=FLOAT  input value alpha0 [default: 5]\n"
 "";
 
 const char usage_pattern[] =
@@ -271,6 +272,9 @@ int elems_to_args(Elements *elements, DocoptArgs *args, bool help,
             args->verbose = option->value;
         } else if (!strcmp(option->olong, "--version")) {
             args->version = option->value;
+        } else if (!strcmp(option->olong, "--alpha0")) {
+            if (option->argument)
+                args->alpha0 = option->argument;
         } else if (!strcmp(option->olong, "--input-wav")) {
             if (option->argument)
                 args->input_wav = option->argument;
@@ -300,7 +304,7 @@ int elems_to_args(Elements *elements, DocoptArgs *args, bool help,
 
 DocoptArgs docopt(int argc, char *argv[], bool help, const char *version) {
     DocoptArgs args = {
-        0, 0, 0, NULL, NULL, NULL,
+        0, 0, 0, (char*) "5", NULL, NULL, NULL,
         usage_pattern, help_message
     };
     Tokens ts;
@@ -312,11 +316,12 @@ DocoptArgs docopt(int argc, char *argv[], bool help, const char *version) {
         {"-h", "--help", 0, 0, NULL},
         {"-v", "--verbose", 0, 0, NULL},
         {NULL, "--version", 0, 0, NULL},
+        {"-0", "--alpha0", 1, 0, NULL},
         {"-i", "--input-wav", 1, 0, NULL},
         {"-o", "--output-vad", 1, 0, NULL},
         {"-w", "--output-wav", 1, 0, NULL}
     };
-    Elements elements = {0, 0, 6, commands, arguments, options};
+    Elements elements = {0, 0, 7, commands, arguments, options};
 
     ts = tokens_new(argc, argv);
     if (parse_args(&ts, &elements))
