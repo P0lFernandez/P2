@@ -139,6 +139,21 @@ Ejercicios
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
 ![alt text](<Screenshot from 2025-03-21 08-45-44.png>)
 
+TABLA CON NUESTRO ETIQUETADO MANUAL
+
+| Tiempo inicial | Tiempo final | Actividad vocal |
+|----------------|--------------|-----------------|
+| 0.0000         | 0.4700       | S               |
+| 0.4775         | 1.6600       | V               |
+| 1.6600         | 1.9025       | S               |
+| 1.9025         | 2.9250       | V               |
+| 2.9250         | 3.8000       | S               |
+| 3.8000         | 5.1425       | V               |
+| 5.1425         | 5.9075       | S               |
+| 5.9075         | 7.6325       | V               |
+| 7.6325         | 7.9675       | S               |
+
+
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
@@ -152,6 +167,7 @@ Ejercicios
 
 
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
+
       La ZCR nos indica cuando el señal de un sonido varia mucho de positivo a negativo. Un claro ejemplo, es en el ruido que hay en los silencios o a los sonidos fricativos o no sonoros donde podriamos ver valores mas altos en estos tramos. Respecto nuestro audio, lo vemos claramente en la primera letra del audio, la 'S' de la palabra 'Som' como hay un pico en el gráfico de ZCR.
       
 
@@ -160,7 +176,8 @@ Ejercicios
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal en
   tiempo real tan exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
 
-![alt text](image.png)
+Una vez ya modificado el código hemos conseguido una maximización del F-score.
+
 
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
@@ -171,6 +188,53 @@ Ejercicios
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
+
+Para encontrar el mejor valor que aproxima los paramatros a buscar, hacemos un bucle de la siguiente manera en el script fot-li:
+
+for alpha0 in $(seq 4.4 0.1 5.5); do 
+    echo -ne "$alpha0:\t"; 
+    scripts/run_vad.sh $alpha0 | grep TOTAL;
+done
+
+| Valor alpha0 | TOTAL (%) |
+|--------------|-----------|
+| 4.4          | 89.201    |
+| 4.5          | 89.222    |
+| 4.6          | 89.243    |
+| 4.7          | 89.265    |
+| 4.8          | 89.278    |
+| 4.9          | 89.291    |
+| 5.0          | 89.292    |
+| 5.1          | 89.305    |
+| 5.2          | 89.285    |
+| 5.3          | 89.276    |
+| 5.4          | 89.262    |
+| 5.5          | 89.246    |
+
+De esta tabla podemos concluir que el mejor valor para alpha0 es 5.1, entonces hacemos el vad_evaluation de este valor y vemos que el summary es el siguiente: 
+
+|            Summary recall          |
+|------------------------------------|
+| Detector | Tiempo          |   %   |
+|----------|-----------------|-------|
+| Voz      | 459.86 / 495.55 | 92.80 |
+| Silencio | 262.82 / 321.17 | 81.83 |
+|                                    |
+|           Summary precision        |
+|------------------------------------|
+| Detector | Tiempo          |   %   |
+|----------|-----------------|-------|
+| Voz      | 459.86 / 518.21 | 88.74 |
+| Silencio | 262.82 / 298.51 | 88.05 |
+|                                    |
+|           Summary F-score          |
+|------------------------------------|
+| Detector |                 |   %   |
+|----------|-----------------|-------|
+| Voz      |       (2)       | 91.96 |
+| Silencio |      (1/2)      | 86.73 |
+|------------------------------------|
+| TOTAL    |         89.305 %        |
 
 
 ### Trabajos de ampliación
@@ -186,6 +250,7 @@ Ejercicios
 - Si ha usado `docopt_c` para realizar la gestión de las opciones y argumentos del programa `vad`, inserte
   una captura de pantalla en la que se vea el mensaje de ayuda del programa.
 
+![alt text](image-1.png)
 
 ### Contribuciones adicionales y/o comentarios acerca de la práctica
 
