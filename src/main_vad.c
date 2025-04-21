@@ -12,6 +12,8 @@ int main(int argc, char *argv[]) {
   int verbose = 0; /* To show internal state of vad: verbose = DEBUG_VAD; */
 
   SNDFILE *sndfile_in, *sndfile_out = 0;
+  //SNDFILE *sndfile_out_cancelacion = 0;
+
   SF_INFO sf_info;
   FILE *vadfile;
   int n_read = 0, i;
@@ -25,6 +27,8 @@ int main(int argc, char *argv[]) {
   unsigned int t, last_t; /* in frames */
 
   char	*input_wav, *output_vad, *output_wav;
+ // char *output_wav_cancelacion; 
+
 
   DocoptArgs args = docopt(argc, argv, /* help */ 1, /* version */ "2.0");
 
@@ -32,6 +36,7 @@ int main(int argc, char *argv[]) {
   input_wav  = args.input_wav;
   output_vad = args.output_vad;
   output_wav = args.output_wav;
+  //output_wav_cancelacion = args.output_wav_cancelacion;
   float alpha0 = atof(args.alpha0);
   
 
@@ -64,7 +69,11 @@ int main(int argc, char *argv[]) {
       return -1;
     }
   }
-
+  //if ((sndfile_out_cancelacion = sf_open(output_wav_cancelacion, SFM_WRITE, &sf_info)) == 0) { ///////////////////////////////////////////////
+  //  fprintf(stderr, "Error opening output cancelado wav file %s (%s)\n", output_wav_cancelacion, strerror(errno));
+   // return -1;
+  //}
+  
   vad_data = vad_open(sf_info.samplerate);
   /* Allocate memory for buffers */
   frame_size   = vad_frame_size(vad_data);
@@ -88,6 +97,17 @@ int main(int argc, char *argv[]) {
   else
     sf_write_float(sndfile_out, buffer, frame_size);
     }
+
+
+   //if (sndfile_out != 0) 
+  //sf_write_float(sndfile_out, buffer, frame_size); // copia exacta del original
+
+//if (sndfile_out_cancelacion != 0) {
+  //if (state == ST_SILENCE)
+   // sf_write_float(sndfile_out_cancelacion, buffer_zeros, frame_size);
+  //else
+   // sf_write_float(sndfile_out_cancelacion, buffer, frame_size);
+//}
 
     
     if (verbose & DEBUG_VAD) vad_show_state(vad_data, stdout);
@@ -117,5 +137,7 @@ int main(int argc, char *argv[]) {
   sf_close(sndfile_in);
   fclose(vadfile);
   if (sndfile_out) sf_close(sndfile_out);
+ // if (sndfile_out_cancelacion) sf_close(sndfile_out_cancelacion);
+
   return 0;
 }
