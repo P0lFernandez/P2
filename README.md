@@ -269,6 +269,8 @@ De esta tabla podemos concluir que el mejor valor para alpha0 es 5.1, entonces h
 
 En ambas transcripciones podemos ver que estan un poco desplazadas respecto a la señal de audio pero los tiempos concuerdan con lo que pusimos nosotros por lo que no entendemos porque se ve así en el programa.
 
+Tambien comentar que hemos estado intentando hacer el ampliable de la cancelación de ruido en los silencios, por eso ahi cosas comentadas en el codigo respecto a la cancelación.
+
 ### Antes de entregar la práctica
 
 Recuerde comprobar que el repositorio cuenta con los códigos correctos y en condiciones de ser 
