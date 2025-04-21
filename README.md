@@ -223,21 +223,21 @@ De esta tabla podemos concluir que el mejor valor para alpha0 es 5.1, entonces h
             Summary recall          
 
 | Detector | Tiempo          |   %   |
-|------------------------------------|
+|-|-|-|
 | Voz      | 459.86 / 495.55 | 92.80 |
 | Silencio | 262.82 / 321.17 | 81.83 |
 
            Summary precision        
 
 | Detector | Tiempo          |   %   |
-|------------------------------------|
+|-|-|-|
 | Voz      | 459.86 / 518.21 | 88.74 |
 | Silencio | 262.82 / 298.51 | 88.05 |
 
            Summary F-score          
 
 | Detector |    Tiempo       |   %   |
-|------------------------------------|
+|-|-|-|
 | Voz      |       (2)       | 91.96 |
 | Silencio |      (1/2)      | 86.73 |
 
