@@ -241,7 +241,10 @@ De esta tabla podemos concluir que el mejor valor para alpha0 es 5.1, entonces h
 | Voz      |       (2)       | 91.96 |
 | Silencio |      (1/2)      | 86.73 |
 
-| TOTAL    |         89.305 %        |
+             
+| Concepto | % |
+|-|-|-|
+| TOTAL    |         89.305          |
 
 
 ### Trabajos de ampliación
