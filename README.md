@@ -182,8 +182,15 @@ Una vez ya modificado el código hemos conseguido una maximización del F-score.
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
 
+![alt text](image-2.png)
+
+La primera trascripcion (.lab) es la manual y la de debajo (.vad) es la automatica hecha por el programa.
+*Comentario añadido en la última sección.
 
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
+
+En ambas transcripciones los principales segmentos de voz y silencio, los de más duración, coinciden con bastante semejanza. El cambio más notable, es que la detección automática también señala las pequeñas muestras de ruido que para nosotros son insignificantes y no hemos marcado. Un ejemplo de esto, es al principio de la señal, donde en la señal de audio se ve un pequeño punto de energía, que nosotros hemos obviado poniéndolo como silencio ya que en el audio no se escucha nada, pero en cambio la automática lo marca como voz.
+En términos generales estamos bastante satisfechos con el resultado de la detección automática programada.
 
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
@@ -213,27 +220,27 @@ done
 
 De esta tabla podemos concluir que el mejor valor para alpha0 es 5.1, entonces hacemos el vad_evaluation de este valor y vemos que el summary es el siguiente: 
 
-|            Summary recall          |
-|------------------------------------|
+            Summary recall          
+
 | Detector | Tiempo          |   %   |
-|----------|-----------------|-------|
+|------------------------------------|
 | Voz      | 459.86 / 495.55 | 92.80 |
 | Silencio | 262.82 / 321.17 | 81.83 |
-|                                    |
-|           Summary precision        |
-|------------------------------------|
+
+           Summary precision        
+
 | Detector | Tiempo          |   %   |
-|----------|-----------------|-------|
+|------------------------------------|
 | Voz      | 459.86 / 518.21 | 88.74 |
 | Silencio | 262.82 / 298.51 | 88.05 |
-|                                    |
-|           Summary F-score          |
+
+           Summary F-score          
+
+| Detector |    Tiempo       |   %   |
 |------------------------------------|
-| Detector |                 |   %   |
-|----------|-----------------|-------|
 | Voz      |       (2)       | 91.96 |
 | Silencio |      (1/2)      | 86.73 |
-|------------------------------------|
+
 | TOTAL    |         89.305 %        |
 
 
@@ -260,6 +267,7 @@ De esta tabla podemos concluir que el mejor valor para alpha0 es 5.1, entonces h
 - Si lo desea, puede realizar también algún comentario acerca de la realización de la práctica que
   considere de interés de cara a su evaluación.
 
+En ambas transcripciones podemos ver que estan un poco desplazadas respecto a la señal de audio pero los tiempos concuerdan con lo que pusimos nosotros por lo que no entendemos porque se ve así en el programa.
 
 ### Antes de entregar la práctica
 

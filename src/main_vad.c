@@ -79,11 +79,17 @@ int main(int argc, char *argv[]) {
     /* End loop when file has finished (or there is an error) */
     if  ((n_read = sf_read_float(sndfile_in, buffer, frame_size)) != frame_size) break;
 
+    state = vad(vad_data, buffer, alpha0);
+    
     if (sndfile_out != 0) {
       /* TODO: copy all the samples into sndfile_out */
+      if (state == ST_SILENCE)
+    sf_write_float(sndfile_out, buffer_zeros, frame_size);
+  else
+    sf_write_float(sndfile_out, buffer, frame_size);
     }
 
-    state = vad(vad_data, buffer, alpha0);
+    
     if (verbose & DEBUG_VAD) vad_show_state(vad_data, stdout);
 
     /* TODO: print only SILENCE and VOICE labels */
@@ -95,9 +101,9 @@ int main(int argc, char *argv[]) {
       last_t = t;
     }
 
-    if (sndfile_out != 0) {
+    //if (sndfile_out != 0) {
       /* TODO: go back and write zeros in silence segments */
-    }
+   // }
   }
 
   state = vad_close(vad_data);
