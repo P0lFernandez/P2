@@ -198,12 +198,12 @@ En términos generales estamos bastante satisfechos con el resultado de la detec
 
 Para encontrar el mejor valor que aproxima los paramatros a buscar, hacemos un bucle de la siguiente manera en el script fot-li:
 
-for alpha0 in $(seq 4.4 0.1 5.5); do 
+	for alpha0 in $(seq 4.4 0.1 5.5); do 
 
     echo -ne "$alpha0:\t"; 
 
     scripts/run_vad.sh $alpha0 | grep TOTAL;
-	
+
 done
 
 | Valor alpha0 | TOTAL (%) |
